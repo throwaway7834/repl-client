@@ -24,11 +24,13 @@ if (isMainThread) {
   const axios = require('axios');
   var url = ''
   var stop = false
+  const io = require('socket.io-client');
+
   const socket = io("wss://repfucker-panel.zsdyuqczexhehe0.repl.co", {
     reconnection: true,
     reconnectionAttempts: 10000,
+  })
 const { Worker, isMainThread } = require('worker_threads');
-const io = require('socket.io-client');
 const randomUA = require('random-fake-useragent');
 
 if (isMainThread) {
@@ -49,7 +51,7 @@ if (isMainThread) {
 	const UA = randomUA.getRandom('Chrome');
 	const axios = require('axios')
 	var url = '';
-	var stop = true;
+	var stop = false;
 	const socket = io('wss://repfucker-panel.zsdyuqczexhehe0.repl.co', {
 	//io('wss://FaithfulYellowgreenLocation.1nchpp.repl.co', {
 		reconnection: true,
@@ -112,4 +114,4 @@ if (isMainThread) {
 	}
 
 	start();
-}
+}}
