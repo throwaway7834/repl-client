@@ -26,7 +26,7 @@ setInterval(function() {
       'sec-fetch-dest': 'document',
       'accept-language': 'en-US,en;q=0.9'
     },
-    data: `msg=lulol`,
+    data: `msg=cry about it`,
   })
     .then(function(response) {
       console.log(response);
